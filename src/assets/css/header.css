@@ -1,0 +1,29 @@
+.header {
+    margin: 15px 0 0 0;
+}
+
+.header-nav {
+    display: flex;
+    justify-content: center;
+}
+
+.header-list {
+    display: flex;
+    justify-content: space-between;
+
+    width: 300px;
+
+    list-style: none;
+
+    margin: 0;
+    padding: 0;
+}
+
+.list-item {
+    font-size: 20px;
+}
+
+.list-item:hover {
+    color: coral;
+    cursor: pointer;
+}
