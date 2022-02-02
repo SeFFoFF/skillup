@@ -4,3 +4,8 @@
     margin: 0 auto;
     padding: 0 20px;
 }
+
+.project-name {
+    margin: 50px 0;
+    text-align: center;
+}
