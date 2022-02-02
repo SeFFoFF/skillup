@@ -1,12 +1,19 @@
 import React from "react"
-import { Header } from "./core/header"
 import "./App.css"
+import {
+    BrowserRouter,
+    Routes,
+    Route
+} from "react-router-dom"
+import { Home } from "./features/home"
 
 const App = () => {
     return (
-        <div className="container">
-            <Header/>
-        </div>
+        <BrowserRouter>
+            <Routes>
+                <Route path="/" element={<Home/>} />
+            </Routes>
+        </BrowserRouter>
     )
 }
 
