@@ -1,0 +1,12 @@
+.shop-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    height: 80px;
+}
+
+.shop-header__title {
+    font-size: 24px;
+    font-weight: bold;
+}
