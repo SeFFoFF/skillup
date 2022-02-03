@@ -5,7 +5,7 @@ import { Link } from "react-router-dom"
 
 export const ProjectCardsList = ({ projects }) => {
 
-    const renderProjectCardList = () => {
+    const renderProjectCards = () => {
         return projects.map(card => (
             <Link key={card.id} to={`/${card.name}`}>
                 <ProjectCard text={card.name}/>
@@ -15,7 +15,7 @@ export const ProjectCardsList = ({ projects }) => {
 
     return (
         <div className="project-card-list">
-            { projects && projects.length ? renderProjectCardList() : <p>No cards yet</p> }
+            { projects && projects.length ? renderProjectCards() : <p>No cards yet</p> }
         </div>
     )
 }
