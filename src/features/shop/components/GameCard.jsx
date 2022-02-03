@@ -7,7 +7,7 @@ export const GameCard = ({ name, tags, price, imageUrl }) => {
 
     const renderGameTags = () => {
         return tags.map((tag, index) => (
-            <GameTag key={tag[index]} tag={tag}/>
+            <GameTag key={index} tag={tag}/>
         ))
     }
 
