@@ -1,0 +1,6 @@
+export { Header } from "./Header"
+export { Cart } from "./Cart"
+export { GameCard } from "./GameCard"
+export { GameCardsList } from "./GameCardsList"
+export { ImageCover } from "./ImageCover"
+export { GameTag } from "./GameTag"
