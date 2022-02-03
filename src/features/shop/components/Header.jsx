@@ -6,8 +6,7 @@ import { Cart } from "./Cart"
 export const Header = () => {
     return (
         <header className="shop-header">
-            <Link to="/" className="shop-header__title">Game store</Link>
-
+            <Link to="/shop" className="shop-header__title">Game shop</Link>
             <Cart/>
         </header>
     )
