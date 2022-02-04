@@ -8,10 +8,7 @@ export const GameCardsList = ({ games }) => {
         return games.map(game => (
             <GameCard
                 key={game.id}
-                name={game.name}
-                tags={game.tags}
-                price={game.price}
-                imageUrl={game.imageUrl}
+                game={game}
             />
         ))
     }
