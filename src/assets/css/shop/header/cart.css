@@ -1,16 +1,42 @@
-.header-cart {
+.cart {
+    position: absolute;
+    top: 30px;
+    left: -375px;
+    z-index: 2;
+    width: 400px;
+    padding: 10px 20px;
+    border-radius: 15px;
+    background-color: white;
+    box-shadow: rgba(149, 157, 165, 0.2) 0 8px 24px;
+}
+
+.cart__games-list {
     display: flex;
+    flex-direction: column;
+}
+
+.cart__game-item {
+    display: flex;
+    justify-content: space-between;
     align-items: center;
-    position: relative;
+    margin: 0 0 10px;
 }
 
-.header-cart__icon {
-    position: relative;
+.cart__total-price {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.cart__order-button {
+    border-radius: 15px;
+    color: white;
+    border: none;
+    padding: 5px;
     cursor: pointer;
+    background-color: royalblue;
 }
 
-.header-cart__total-price {
-    font-size: 18px;
-    font-weight: bold;
-    margin: 0 0 0 15px;
+.cart__empty {
+    text-align: center;
 }

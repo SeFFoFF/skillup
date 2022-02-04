@@ -1,6 +1,7 @@
 export { Header } from "./Header"
-export { Cart } from "./Cart"
+export { IconCart } from "./IconCart"
 export { GameCard } from "./GameCard"
 export { GameCardsList } from "./GameCardsList"
 export { ImageCover } from "./ImageCover"
 export { GameTag } from "./GameTag"
+export { Cart } from "./Cart"

@@ -2,11 +2,14 @@ import React from "react"
 import "../../../assets/css/shop/gameCard/gameCard.css"
 import { ImageCover } from "./ImageCover"
 import { GameTag } from "./GameTag"
-import { useDispatch } from "react-redux"
-import { setItemInCart } from "../../../redux/shop/reducers/cartReducer"
+import { useDispatch, useSelector } from "react-redux"
+import { deleteItemFromCart, setItemInCart } from "../../../redux/shop/cartReducer"
 
 export const GameCard = ({ game }) => {
     const dispatch = useDispatch()
+    const itemsInCart = useSelector(state => state.cart.itemsInCart)
+
+    const isGameInCart = itemsInCart.some(item => item.id === game.id)
 
     const renderGameTags = () => {
         return game.tags.map((tag, index) => (
@@ -14,9 +17,11 @@ export const GameCard = ({ game }) => {
         ))
     }
 
-    const addGameToCartHandler = (event) => {
+    const cartActionsHandler = (event) => {
         event.stopPropagation()
-        dispatch(setItemInCart(game))
+
+        if (isGameInCart) dispatch(deleteItemFromCart(game.id))
+        else dispatch(setItemInCart(game))
     }
 
     return (
@@ -28,11 +33,13 @@ export const GameCard = ({ game }) => {
                     { game.tags && game.tags.length ? renderGameTags() : "" }
                 </div>
                 <div className="game-card__buy-wrapper">
-                    <p className="game-card__price">{ game.price }</p>
+                    <p className="game-card__price">{ game.price }$</p>
                     <button
                         className="game-card__button"
-                        onClick={addGameToCartHandler}
-                    >В корзину</button>
+                        onClick={cartActionsHandler}
+                    >
+                        { isGameInCart ? "Убрать из корзины" : "В корзину"}
+                    </button>
                 </div>
             </div>
         </div>
