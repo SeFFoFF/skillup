@@ -14,10 +14,8 @@ const App = () => {
             <BrowserRouter>
                 <Routes>
                     <Route path="/" element={<Home/>} />
-
-                    <Route path="/shop" element={<Shop/>}/>
-                    {/*<Route path=":home" element={null} />*/}
-                    {/*</Route>*/}
+                    <Route path="/shop/*" element={<Shop/>}/>
+                    <Route path="*" element={<p>404</p>}/>
                 </Routes>
             </BrowserRouter>
         </div>

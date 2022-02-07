@@ -8,7 +8,6 @@
     /*background-color: rgb(36, 37, 41);*/
     /*color: white;*/
 
-    /*cursor: pointer;*/
     /*margin: 0 50px 30px 0;*/
 }
 
@@ -20,6 +19,7 @@
     font-size: 18px;
     font-weight: bold;
     margin: 0 0 10px 0;
+    cursor: pointer;
 }
 
 .game-card__tags {
