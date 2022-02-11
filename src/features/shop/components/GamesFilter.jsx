@@ -6,8 +6,10 @@ export const GamesFilter = ({ gameTags, setFilter }) => {
     const [filterTags, setFilterTags] = useState([])
 
     useEffect(() => {
-        console.log(filterTags)
-        // setFilter(filterTags) TODO filter array
+        setFilter({
+            byTags: filterTags,
+            byPrice: null, // TODO
+        })
     }, [filterTags])
 
     const onTagClickHandler = (tag) => {

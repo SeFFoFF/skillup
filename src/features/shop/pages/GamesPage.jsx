@@ -1,12 +1,13 @@
 import React, { useEffect, useState } from "react"
 import { gamesData } from "../../../constants/gamesData"
-import { getUniqueTags } from "../../../utils"
+import { getUniqueTags, getFilteredGamesByTags } from "../../../utils"
 import { GameCardsList, GamesFilter } from "../components"
 
 export const GamesPage = () => {
-    const [games, setGames] = useState(null)
+    const [games, setGames] = useState([])
+    const [filteredGames, setFilteredGames] = useState([])
     const [gameTags, setGameTags] = useState([])
-    const [filter, setFilter] = useState([])
+    const [filter, setFilter] = useState({})
 
     useEffect(() => {
         setGames(gamesData)
@@ -14,10 +15,14 @@ export const GamesPage = () => {
         if (games) setGameTags(getUniqueTags(games))
     }, [games])
 
+    useEffect(() => {
+        setFilteredGames(getFilteredGamesByTags(games, filter.byTags))
+    }, [filter])
+
     return (
         <div className="games-page">
             <GamesFilter gameTags={gameTags} setFilter={setFilter}/>
-            <GameCardsList games={games}/>
+            <GameCardsList games={filteredGames}/>
         </div>
     )
 }
