@@ -11,3 +11,12 @@
 .game-tag:not(:last-child) {
     margin: 0 7px 0 0;
 }
+
+.game-tag--active {
+    background-color: royalblue;
+    color: white;
+}
+
+.game-tag--pointer {
+    cursor: pointer;
+}
