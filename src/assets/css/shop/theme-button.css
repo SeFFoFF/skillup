@@ -62,7 +62,3 @@ input:checked + .switch-slider:before {
 .switch-slider.round:before {
     border-radius: 50%;
 }
-
-span {
-    font-size: 10px;
-}
