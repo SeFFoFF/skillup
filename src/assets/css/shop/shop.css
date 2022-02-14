@@ -1,0 +1,41 @@
+.shop {
+    padding: 0 20px;
+}
+
+.shop--dark {
+    background-color: rgb(25, 26, 28);
+}
+
+.shop--dark .shop-header__title {
+    color: white;
+}
+
+.shop--dark .header-icon-cart {
+    color: white;
+}
+
+.shop--dark .cart {
+    background-color: rgb(36, 37, 41);
+    color: white;
+}
+
+.shop--dark .game-card {
+    background-color: rgb(36, 37, 41);
+}
+
+.shop--dark .game-card__name,
+.shop--dark .game-card__price,
+.shop--dark .game-name,
+.shop--dark .game-description,
+.shop--dark .game-price {
+    color: white;
+}
+
+.shop--dark .game-tag {
+    background-color: rgb(80, 82, 84);
+    color: white;
+}
+
+.shop--dark .game-tag--active {
+    background-color: royalblue;
+}

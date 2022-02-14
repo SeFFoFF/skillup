@@ -10,3 +10,11 @@
     font-size: 24px;
     font-weight: bold;
 }
+
+.shop-header__right-block {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    width: 100px;
+}
