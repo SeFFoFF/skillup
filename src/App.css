@@ -22,9 +22,9 @@ a {
     color: #2c2e37;
 }
 
-.app-container {
+.layout-container {
     width: 100%;
-    max-width: 1190px;
+    max-width: 1230px;
     margin: 0 auto;
     padding: 0 20px;
 }

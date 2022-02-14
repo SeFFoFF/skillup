@@ -10,15 +10,13 @@ import { Shop } from "./features/shop"
 
 const App = () => {
     return (
-        <div className="app-container">
-            <BrowserRouter>
-                <Routes>
-                    <Route path="/" element={<Home/>} />
-                    <Route path="/shop/*" element={<Shop/>}/>
-                    <Route path="*" element={<p>404</p>}/>
-                </Routes>
-            </BrowserRouter>
-        </div>
+        <BrowserRouter>
+            <Routes>
+                <Route path="/" element={<Home/>} />
+                <Route path="/shop/*" element={<Shop/>}/>
+                <Route path="*" element={<p>404</p>}/>
+            </Routes>
+        </BrowserRouter>
     )
 }
 
