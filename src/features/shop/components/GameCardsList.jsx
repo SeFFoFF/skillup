@@ -1,5 +1,5 @@
 import React from "react"
-import "../../../assets/css/shop/gameCard/gameCardsList.css"
+import "../../../assets/css/shop/gameCardsList.css"
 import { GameCard } from "./GameCard"
 
 export const GameCardsList = ({ games }) => {
@@ -15,7 +15,7 @@ export const GameCardsList = ({ games }) => {
 
     return (
         <div className="game-cards-list">
-            { games && games.length ? renderGameCards() : <p>No games yet</p> }
+            { renderGameCards() }
         </div>
     )
 }
