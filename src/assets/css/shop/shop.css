@@ -4,6 +4,11 @@
 
 .shop--dark {
     background-color: rgb(25, 26, 28);
+    height: 1100px;
+}
+
+.shop--dark .loader div:after {
+    background: #fff;
 }
 
 .shop--dark .shop-header__title {
