@@ -1,1 +1,1 @@
-export { getUniqueTags, getFilteredGamesByTags, getAllGames } from "./shop"
+export { getUniqueTags, getFilteredGamesByTags, getAllGames, getIconByProjectName } from "./shop"

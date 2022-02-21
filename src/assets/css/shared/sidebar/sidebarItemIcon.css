@@ -1,0 +1,12 @@
+.item-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    width: 30px;
+    height: 30px;
+    border-radius: 7px;
+    background-color: aliceblue;
+
+    margin: 0 10px 0;
+}

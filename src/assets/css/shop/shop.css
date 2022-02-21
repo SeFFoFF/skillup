@@ -1,10 +1,22 @@
 .shop {
-    padding: 0 20px;
+    position: relative;
 }
 
 .shop--dark {
     background-color: rgb(25, 26, 28);
     height: 1100px;
+}
+
+.shop--dark .sidebar {
+    box-shadow: rgba(255, 255, 255, 0.15) 1.95px 1.95px 2.6px;
+}
+
+.shop--dark .sidebar-item:hover {
+    box-shadow: rgba(255, 255, 255, 0.16) 0 1px 4px;
+}
+
+.shop--dark .sidebar-item__name {
+    color: #ffffff;
 }
 
 .shop--dark .loader div:after {

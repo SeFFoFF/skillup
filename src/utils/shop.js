@@ -1,3 +1,5 @@
+import { icons } from "../constants"
+
 export const getUniqueTags = (games) => {
     return games?.map(game => game.tags)
         .flat()
@@ -13,4 +15,15 @@ export const getAllGames = () => {
     return fetch("https://my-json-server.typicode.com/SeFFoFF/skillup/games")
         .then(res => res.json())
         .then(data => data)
+}
+
+export const getIconByProjectName = (projectName) => {
+    switch (projectName) {
+    case "Home":
+        return icons.home
+    case "Shop":
+        return icons.shop
+    default:
+        return icons.default
+    }
 }
