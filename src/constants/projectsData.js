@@ -1,14 +1,14 @@
 export const projectsData = [
     {
         id: 1,
-        name: "shop",
+        name: "Shop",
     },
     {
         id: 2,
-        name: "game",
+        name: "Test 1",
     },
     {
         id: 3,
-        name: "test",
+        name: "Test 2",
     },
 ]
