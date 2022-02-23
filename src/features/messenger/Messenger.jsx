@@ -1,8 +1,10 @@
 import React from "react"
-import { MessengerLayout } from "./components"
+import { FirebaseProvider, MessengerLayout } from "./components"
 
 export const Messenger = () => {
     return (
-        <MessengerLayout className="messenger"/>
+        <FirebaseProvider>
+            <MessengerLayout className="messenger"/>
+        </FirebaseProvider>
     )
 }
