@@ -5,7 +5,7 @@ export const projectsData = [
     },
     {
         id: 2,
-        name: "Test 1",
+        name: "Messenger",
     },
     {
         id: 3,

@@ -7,6 +7,7 @@ import {
 } from "react-router-dom"
 import { Home } from "./features/home"
 import { Shop } from "./features/shop"
+import { Messenger } from "./features/messenger"
 
 const App = () => {
     return (
@@ -14,7 +15,7 @@ const App = () => {
             <Routes>
                 <Route path="/" element={<Home/>} />
                 <Route path="/shop/*" element={<Shop/>}/>
-                <Route path="*" element={<p>404</p>}/>
+                <Route path="/messenger/*" element={<Messenger/>}/>
             </Routes>
         </BrowserRouter>
     )
