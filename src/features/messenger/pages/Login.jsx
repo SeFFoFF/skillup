@@ -1,13 +1,21 @@
-import React from "react"
+import React, { useContext } from "react"
 import { useForm, FormProvider } from "react-hook-form"
-import { Input } from "../components"
+import { FirebaseContext, Input } from "../components"
+import { GoogleAuthProvider, signInWithPopup } from "firebase/auth"
 import "../../../assets/css/messenger/loginPage.css"
 
 export const Login = () => {
+    const { auth } = useContext(FirebaseContext)
     const formMethods = useForm()
 
     const onSubmit = (data) => {
         console.log(data)
+    }
+
+    const loginWithGoogle = async () => {
+        const googleProvider = new GoogleAuthProvider()
+        const { user } = await signInWithPopup(auth, googleProvider)
+
     }
 
     return (
@@ -20,7 +28,9 @@ export const Login = () => {
 
                     <div className="login-page__sign-with-wrapper">
                         <p>Log in with</p>
-                        <img src="https://cdn-icons-png.flaticon.com/512/2991/2991148.png" alt="" width="35px"/>
+                        <div>
+                            <img onClick={loginWithGoogle} src="https://cdn-icons-png.flaticon.com/512/2991/2991148.png" alt="" width="35px"/>
+                        </div>
                     </div>
                 </form>
             </FormProvider>

@@ -10,3 +10,10 @@
     font-size: 24px;
     font-weight: bold;
 }
+
+.messenger-header__user-info {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 175px;
+}

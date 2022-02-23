@@ -1,8 +1,8 @@
 import React from "react"
 import { createContext } from "react"
-import { app, auth, firestore } from "../firebase.config"
+import { app, auth, firestore } from "../firebase"
 
-const FirebaseContext = createContext()
+export const FirebaseContext = createContext()
 
 export const FirebaseProvider = ({ children }) => {
     return (
