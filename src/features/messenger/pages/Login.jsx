@@ -15,7 +15,6 @@ export const Login = () => {
     const loginWithGoogle = async () => {
         const googleProvider = new GoogleAuthProvider()
         const { user } = await signInWithPopup(auth, googleProvider)
-
     }
 
     return (

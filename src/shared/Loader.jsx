@@ -1,5 +1,5 @@
 import React from "react"
-import "../assets/css/shop/loader.css"
+import "../assets/css/shared/loader.css"
 
 export const Loader = () => {
     return (
