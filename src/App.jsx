@@ -3,7 +3,8 @@ import "./App.css"
 import {
     BrowserRouter,
     Routes,
-    Route
+    Route,
+    HashRouter
 } from "react-router-dom"
 import { Home } from "./features/home"
 import { Shop } from "./features/shop"

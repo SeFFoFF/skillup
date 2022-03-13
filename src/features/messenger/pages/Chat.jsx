@@ -1,13 +1,16 @@
-import React, { useContext, useState } from "react"
-import { FirebaseContext } from "../components"
+import React, { useContext, useState, useRef, useEffect } from "react"
+import { FirebaseContext, Message } from "../components"
 import { useAuthState } from "react-firebase-hooks/auth"
 import { useCollectionData } from "react-firebase-hooks/firestore"
 import { collection, serverTimestamp, addDoc, query, orderBy } from "firebase/firestore"
 import { Loader } from "../../../shared"
+import { AiOutlineSend } from "react-icons/ai"
 import "../../../assets/css/messenger/chatPage.css"
 
 export const Chat = () => {
     const [value, setValue] = useState("")
+
+    const scrollRef = useRef(null)
 
     const { auth, firestore } = useContext(FirebaseContext)
     const [user] = useAuthState(auth)
@@ -16,6 +19,15 @@ export const Chat = () => {
     const messagesRefByCreatedAt = query(messagesRef, orderBy("createdAt"))
 
     const [messages, loading] = useCollectionData(messagesRefByCreatedAt)
+
+    useEffect(() => {
+        if (scrollRef) {
+            scrollRef.current.addEventListener("DOMNodeInserted", event => {
+                const { currentTarget: target } = event
+                target.scroll({ top: target.scrollHeight, behavior: "smooth" })
+            })
+        }
+    }, [])
 
     const sendMessage = async () => {
         await addDoc(messagesRef, {
@@ -28,16 +40,11 @@ export const Chat = () => {
         setValue("")
     }
 
-    // TODO create messagesList and message components
     const renderMessages = () => {
         return messages.map((message, index) => {
             const isUserSender = user.uid === message?.uid
 
-            return <div key={index} className={isUserSender ? "message your-message" : "message"} >
-                <h6>{message.displayName}</h6>
-                <p>{message.text}</p>
-            </div>
-
+            return <Message key={index} message={message} isUserSender={isUserSender}/>
         })
     }
 
@@ -50,15 +57,17 @@ export const Chat = () => {
 
             <div className="chat-page__main">
 
-                <div className="main__chat-block">
+                <div className="main__chat-block" ref={scrollRef}>
                     {
                         loading ? <Loader/> : renderMessages()
                     }
                 </div>
 
                 <div className="main__input-block">
-                    <input type="text" value={value} onChange={e => setValue(e.target.value)}/>
-                    <button onClick={sendMessage}>send</button>
+                    <input type="text" value={value} onChange={e => setValue(e.target.value)} placeholder="Message"/>
+                    <button onClick={sendMessage} disabled={!value} className={value ? "send-button send-button--pointer" : "send-button"}>
+                        <AiOutlineSend size={20}/>
+                    </button>
                 </div>
 
             </div>
