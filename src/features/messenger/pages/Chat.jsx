@@ -27,8 +27,23 @@ export const Chat = () => {
                 target.scroll({ top: target.scrollHeight, behavior: "smooth" })
             })
         }
-        console.log(user)
+        // TODO
+        // console.log(user)
     }, [])
+
+    useEffect(() => {
+        const listener = async (event) => {
+            if (value.length && (event.code === "Enter" || event.code === "NumpadEnter")) {
+                await sendMessage()
+            }
+        }
+
+        document.addEventListener("keydown", listener)
+
+        return () => {
+            document.removeEventListener("keydown", listener)
+        }
+    }, [value.length])
 
     const sendMessage = async () => {
         await addDoc(messagesRef, {
