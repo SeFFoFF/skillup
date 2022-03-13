@@ -14,7 +14,9 @@
     width: 80%;
     height: 85vh;
 
-    background-color: #eaeaea;
+    /*background-image: url("/src/assets/images/messenger/test.jpg");*/
+    /*background-size: 350px;*/
+    background-color: #FDF4E3;
 }
 
 .main__chat-block {
@@ -23,32 +25,14 @@
     align-items: flex-start;
     height: 90%;
     overflow-y: auto;
-    padding: 15px 15px 0 15px;
-}
-
-.message {
-    padding: 10px;
-    background-color: white;
-    border-radius: 5px;
-
-    margin: 0 0 15px;
-}
-
-.message span {
-
-}
-
-.your-message {
-    text-align: right;
-    background-color: #00BFFF;
-    align-self: flex-end;
+    padding: 15px 0 0 15px;
 }
 
 .main__input-block {
     display: flex;
     align-items: center;
     height: 10%;
-    padding: 10px;
+    padding: 0 10px 10px;
 }
 
 .main__input-block input {

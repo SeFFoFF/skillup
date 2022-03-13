@@ -10,7 +10,7 @@ import "../../../assets/css/messenger/chatPage.css"
 export const Chat = () => {
     const [value, setValue] = useState("")
 
-    const scrollRef = useRef(null)
+    const scrollBlock = useRef(null)
 
     const { auth, firestore } = useContext(FirebaseContext)
     const [user] = useAuthState(auth)
@@ -21,12 +21,13 @@ export const Chat = () => {
     const [messages, loading] = useCollectionData(messagesRefByCreatedAt)
 
     useEffect(() => {
-        if (scrollRef) {
-            scrollRef.current.addEventListener("DOMNodeInserted", event => {
+        if (scrollBlock) {
+            scrollBlock.current.addEventListener("DOMNodeInserted", event => {
                 const { currentTarget: target } = event
                 target.scroll({ top: target.scrollHeight, behavior: "smooth" })
             })
         }
+        console.log(user)
     }, [])
 
     const sendMessage = async () => {
@@ -42,7 +43,7 @@ export const Chat = () => {
 
     const renderMessages = () => {
         return messages.map((message, index) => {
-            const isUserSender = user.uid === message?.uid
+            const isUserSender = user?.uid === message?.uid
 
             return <Message key={index} message={message} isUserSender={isUserSender}/>
         })
@@ -57,7 +58,7 @@ export const Chat = () => {
 
             <div className="chat-page__main">
 
-                <div className="main__chat-block" ref={scrollRef}>
+                <div className="main__chat-block" ref={scrollBlock}>
                     {
                         loading ? <Loader/> : renderMessages()
                     }
