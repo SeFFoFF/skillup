@@ -42,7 +42,7 @@ export const Chat = () => {
     }
 
     const renderMessages = () => {
-        return messages.map((message, index) => {
+        return messages?.map((message, index) => {
             const isUserSender = user?.uid === message?.uid
 
             return <Message key={index} message={message} isUserSender={isUserSender}/>
