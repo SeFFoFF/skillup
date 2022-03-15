@@ -2,13 +2,16 @@ import React, { useContext, useState, useRef, useEffect } from "react"
 import { FirebaseContext, Message } from "../components"
 import { useAuthState } from "react-firebase-hooks/auth"
 import { useCollectionData } from "react-firebase-hooks/firestore"
-import { collection, serverTimestamp, addDoc, query, orderBy } from "firebase/firestore"
+import { collection, serverTimestamp, addDoc, query, orderBy, where } from "firebase/firestore"
 import { Loader } from "../../../shared"
 import { AiOutlineSend } from "react-icons/ai"
 import "../../../assets/css/messenger/chatPage.css"
 
 export const Chat = () => {
-    const [value, setValue] = useState("")
+    const [messageValue, setMessageValue] = useState("")
+    const [searchValue, setSearchValue] = useState("")
+
+    const [userByEmail, setUserByEmail] = useState(null)
 
     const scrollBlock = useRef(null)
 
@@ -17,8 +20,14 @@ export const Chat = () => {
 
     const messagesRef = collection(firestore, "messages")
     const messagesRefByCreatedAt = query(messagesRef, orderBy("createdAt"))
-
     const [messages, loading] = useCollectionData(messagesRefByCreatedAt)
+
+    const usersRef = collection(firestore, "users")
+
+    const userSearchRef = query(usersRef, where("email", "==", searchValue))
+
+    const [searchedUser] = useCollectionData(userSearchRef)
+    const [usersCollection] = useCollectionData(usersRef)
 
     useEffect(() => {
         if (scrollBlock) {
@@ -27,13 +36,34 @@ export const Chat = () => {
                 target.scroll({ top: target.scrollHeight, behavior: "smooth" })
             })
         }
-        // TODO
-        // console.log(user)
     }, [])
+
+    useEffect(async () => {
+        if (usersCollection) {
+            let isUserInCollection = false
+
+            usersCollection.map(userInCollection => {
+                if (userInCollection.uid === user.uid) {
+                    isUserInCollection = true
+                }
+            })
+
+            if (!isUserInCollection)
+                await addDoc(usersRef, {
+                    uid: user.uid,
+                    email: user.email,
+                    displayName: user.displayName,
+                    photoUrl: user.photoURL,
+                    phoneNumber: user?.phoneNumber,
+                    creationTime: user.metadata.creationTime,
+                    lastSignInTime: user.metadata.lastSignInTime,
+                })
+        }
+    }, [usersCollection])
 
     useEffect(() => {
         const listener = async (event) => {
-            if (value.length && (event.code === "Enter" || event.code === "NumpadEnter")) {
+            if (messageValue.length && (event.code === "Enter" || event.code === "NumpadEnter")) {
                 await sendMessage()
             }
         }
@@ -43,17 +73,17 @@ export const Chat = () => {
         return () => {
             document.removeEventListener("keydown", listener)
         }
-    }, [value.length])
+    }, [messageValue.length])
 
     const sendMessage = async () => {
         await addDoc(messagesRef, {
             uid: user.uid,
             displayName: user.displayName,
             photoUrl: user.photoURL,
-            text: value,
+            text: messageValue,
             createdAt: serverTimestamp()
         })
-        setValue("")
+        setMessageValue("")
     }
 
     const renderMessages = () => {
@@ -64,11 +94,30 @@ export const Chat = () => {
         })
     }
 
+    // TODO доделать нормальный поиск
+    const searchUserByEmail = () => {
+        setUserByEmail(searchedUser)
+    }
+
     return (
         <div className="chat-page">
 
             <div className="chat-page__left-side">
-
+                <div className="">
+                    <input type="text" value={searchValue} onChange={e => setSearchValue(e.target.value)} placeholder="Search by email"/>
+                    <button onClick={searchUserByEmail}>Search</button>
+                </div>
+                <div className="">
+                    {
+                        userByEmail?.map(info => (
+                            <div key={info.uid }>
+                                <p>{ info.displayName }</p>
+                                <p>{ info.email }</p>
+                                <p>{ info.uid }</p>
+                            </div>
+                        ))
+                    }
+                </div>
             </div>
 
             <div className="chat-page__main">
@@ -80,8 +129,8 @@ export const Chat = () => {
                 </div>
 
                 <div className="main__input-block">
-                    <input type="text" value={value} onChange={e => setValue(e.target.value)} placeholder="Message"/>
-                    <button onClick={sendMessage} disabled={!value} className={value ? "send-button send-button--pointer" : "send-button"}>
+                    <input type="text" value={messageValue} onChange={e => setMessageValue(e.target.value)} placeholder="Message"/>
+                    <button onClick={sendMessage} disabled={!messageValue} className={messageValue ? "send-button send-button--pointer" : "send-button"}>
                         <AiOutlineSend size={20}/>
                     </button>
                 </div>
