@@ -1,0 +1,23 @@
+.left-sidebar {
+    width: 20%;
+    height: 85vh;
+}
+
+.left-sidebar__tabs {
+    display: flex;
+    align-items: center;
+    box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
+}
+
+.sidebar__user-info {
+    display: flex;
+    align-items: center;
+    column-gap: 10px;
+
+    padding: 15px 25px;
+}
+
+.sidebar__user-info .user-image {
+    width: 35px;
+    border-radius: 50%;
+}

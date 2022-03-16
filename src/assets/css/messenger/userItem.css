@@ -1,0 +1,32 @@
+.user-item {
+    display: flex;
+    align-items: center;
+    column-gap: 10px;
+    padding: 5px 10px;
+    border-top: 1px solid #f1f1f1;
+    cursor: pointer;
+}
+
+.user-item:hover {
+    background-color: #f8f8f8;
+}
+
+.user-image {
+    width: 35px;
+    border-radius: 50%;
+}
+
+.user-info {
+    /*display: flex;*/
+}
+
+.user-info__name {
+    font-weight: 500;
+}
+
+.user-info__last-message {
+    width: 180px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}

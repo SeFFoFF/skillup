@@ -12,12 +12,6 @@ export const Header = () => {
     return (
         <header className="messenger-header">
             <Link to="/Messenger" className="messenger-header__title">Messenger</Link>
-
-            <div className="messenger-header__user-info">
-                <img className="user-image" src={user?.photoURL} alt=""/>
-                <p className="user-name">{ user?.displayName }</p>
-            </div>
-
             {
                 user && <IoLogOutOutline size={25} className="user-info__logout" onClick={() => auth.signOut()}/>
             }

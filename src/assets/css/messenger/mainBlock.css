@@ -1,0 +1,19 @@
+.main-block {
+    width: 80%;
+    height: 85vh;
+
+    /*background-image: url("/src/assets/images/messenger/test.jpg");*/
+    /*background-size: 350px;*/
+    background-color: #FDF4E3;
+    box-shadow: rgb(50 50 93 / 10%) 15px 0 50px 0 inset;
+}
+
+.main-block__chat {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    position: relative;
+    height: 90%;
+    overflow-y: auto;
+    padding: 15px 150px 0;
+}

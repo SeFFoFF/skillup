@@ -1,0 +1,21 @@
+.tab {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    width: 50%;
+    height: 50px;
+
+    cursor: pointer;
+
+    border-bottom: 3px solid transparent;
+}
+
+.tab:hover {
+    background-color: #f8f8f8;
+}
+
+.tab--active{
+    color: #b1dbe8;
+    border-bottom: 3px solid #b1dbe8;
+}
