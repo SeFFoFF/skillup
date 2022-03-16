@@ -1,4 +1,5 @@
 .left-sidebar {
+    position: relative;
     width: 20%;
     height: 85vh;
 }
@@ -6,7 +7,7 @@
 .left-sidebar__tabs {
     display: flex;
     align-items: center;
-    box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
+    box-shadow: rgba(0, 0, 0, 0.15) 0.1px 1.95px 2.6px;
 }
 
 .sidebar__user-info {
@@ -15,6 +16,11 @@
     column-gap: 10px;
 
     padding: 15px 25px;
+}
+
+.sidebar__user-info:hover {
+    color: #b1dbe8;
+    cursor: pointer;
 }
 
 .sidebar__user-info .user-image {
