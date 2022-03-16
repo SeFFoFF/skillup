@@ -1,0 +1,9 @@
+.chat-block {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    position: relative;
+    height: 90%;
+    overflow-y: auto;
+    padding: 15px 150px 0;
+}
