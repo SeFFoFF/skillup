@@ -30,7 +30,7 @@ export const LeftSidebar = () => {
                 <Tab activeTab={false} isFriendsTab={isFriendsTab} setIsFriendsTab={setIsFriendsTab} icon={<BsSearch size="20px"/>}/>
             </div>
             {
-                isFriendsTab ? <FriendsList/> : <SearchUsersList/>
+                isFriendsTab ? <FriendsList user={user}/> : <SearchUsersList/>
             }
         </div>
     )

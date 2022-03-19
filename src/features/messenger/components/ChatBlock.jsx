@@ -48,6 +48,7 @@ export const ChatBlock = () => {
                     phoneNumber: user?.phoneNumber,
                     creationTime: user.metadata.creationTime,
                     lastSignInTime: user.metadata.lastSignInTime,
+                    friends: [""]
                 })
         }
     }, [usersCollection])
