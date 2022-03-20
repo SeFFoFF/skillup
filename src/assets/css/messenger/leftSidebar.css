@@ -4,26 +4,31 @@
     height: 85vh;
 }
 
-.left-sidebar__tabs {
+.left-sidebar .tabs {
     display: flex;
     align-items: center;
     box-shadow: rgba(0, 0, 0, 0.15) 0.1px 1.95px 2.6px;
 }
 
-.sidebar__user-info {
+.left-sidebar .current-user-info__wrapper {
     display: flex;
     align-items: center;
-    column-gap: 10px;
-
+    justify-content: space-between;
     padding: 15px 25px;
 }
 
-.sidebar__user-info:hover {
-    color: #b1dbe8;
+.left-sidebar .current-user-info {
+    display: flex;
+    align-items: center;
+    column-gap: 10px;
     cursor: pointer;
 }
 
-.sidebar__user-info .user-image {
+.left-sidebar .current-user-info:hover {
+    color: #b1dbe8;
+}
+
+.left-sidebar .current-user-info .current-user-image {
     width: 35px;
     border-radius: 50%;
 }
