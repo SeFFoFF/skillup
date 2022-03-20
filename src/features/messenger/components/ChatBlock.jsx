@@ -44,7 +44,7 @@ export const ChatBlock = () => {
                     uid: user.uid,
                     email: user.email,
                     displayName: user.displayName,
-                    photoUrl: user.photoURL,
+                    photoURL: user.photoURL,
                     phoneNumber: user?.phoneNumber,
                     creationTime: user.metadata.creationTime,
                     lastSignInTime: user.metadata.lastSignInTime,
