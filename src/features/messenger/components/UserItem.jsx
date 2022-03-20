@@ -39,7 +39,7 @@ export const UserItem = ({ currentUser, user, isFriend = true }) => {
                     isFriend && <p className="user-info__last-message">Lorem ipsum dolor. Lorem ipsum dolor. Lorem ipsum dolor.</p>
                 }
                 {
-                    !isRequestSend && <button onClick={sendFriendRequestHandler}>Send</button>
+                    !isFriend && !isRequestSend && <button onClick={sendFriendRequestHandler}>Send</button>
                 }
             </div>
         </div>
