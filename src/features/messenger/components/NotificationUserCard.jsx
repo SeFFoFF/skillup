@@ -9,6 +9,7 @@ import "../../../assets/css/messenger/notificationUserCard.css"
 export const NotificationUserCard = ({ notification, currentUser }) => {
     const { firestore } = useContext(FirebaseContext)
 
+    // TODO two way accept
     const acceptRequestHandler = async (userId, docId) => {
         try {
             let payload

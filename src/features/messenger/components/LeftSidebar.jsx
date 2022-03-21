@@ -51,7 +51,7 @@ export const LeftSidebar = () => {
             </div>
 
             {
-                isFriendsTab ? <FriendsList user={user}/> : <SearchUsersList/>
+                isFriendsTab ? <FriendsList user={user}/> : <SearchUsersList user={user}/>
             }
         </div>
     )

@@ -1,10 +1,11 @@
-import React, { useContext, useState } from "react"
+import React, { useContext, useEffect, useState } from "react"
 import { collection, query, where } from "firebase/firestore"
 import { useCollectionData } from "react-firebase-hooks/firestore"
 import { FirebaseContext } from "./FirebaseProvider"
 import { UserItem } from "./UserItem"
 
-export const SearchUsersList = () => {
+export const SearchUsersList = ({ user }) => {
+    const [isSameUser, setIsSameUser] = useState(false)
     const [searchValue, setSearchValue] = useState("")
     const [searchedUserByEmail, setSearchedUserByEmail] = useState(null)
 
@@ -14,9 +15,18 @@ export const SearchUsersList = () => {
     const userSearchRef = query(usersRef, where("email", "==", searchValue))
     const [searchedUser] = useCollectionData(userSearchRef)
 
+    useEffect(() => {
+        searchedUser?.map(userItem => {
+            if (userItem.uid === user.uid)
+                setIsSameUser(true)
+        })
+    }, [searchedUser])
+
     const searchUserByEmail = () => {
         setSearchedUserByEmail(searchedUser)
     }
+
+    // TODO Oops placeholder and styles for search input
 
     return (
         <div className="search-users">
@@ -26,9 +36,11 @@ export const SearchUsersList = () => {
             </div>
             <div className="search-users-list">
                 {
-                    searchedUserByEmail?.map(user => (
-                        <UserItem key={user.uid} userInfo={user} isFriend={false}/>
-                    ))
+                    !isSameUser ?
+                        searchedUserByEmail?.map(user => (
+                            <UserItem key={user.uid} userInfo={user} isFriend={false}/>
+                        ))
+                        : <p>Oops</p>
                 }
             </div>
         </div>
