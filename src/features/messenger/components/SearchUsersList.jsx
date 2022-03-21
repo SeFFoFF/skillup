@@ -5,7 +5,7 @@ import { FirebaseContext } from "./FirebaseProvider"
 import { UserItem } from "./UserItem"
 
 export const SearchUsersList = () => {
-    const [searchValue, setSearchValue] = useState("kveenter@gmail.com")
+    const [searchValue, setSearchValue] = useState("")
     const [searchedUserByEmail, setSearchedUserByEmail] = useState(null)
 
     const { firestore } = useContext(FirebaseContext)

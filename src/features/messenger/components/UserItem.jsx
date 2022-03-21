@@ -16,10 +16,21 @@ export const UserItem = ({ userInfo, isFriend = true }) => {
     const docIdRef = user && userInfo && query(notificationsRef, where("id", "==", user.uid + userInfo.uid))
     const [docId] = useCollectionData(docIdRef)
 
+    const usersRef = collection(firestore, "users")
+    const currentUserRef = query(usersRef, where("uid", "==", user.uid))
+    const [currentUser] = useCollectionData(currentUserRef)
+
     useEffect(() => {
-        if (docId && docId.length) setIfRequestSend(true)
+        if (docId?.length) setIfRequestSend(true)
         else setIfRequestSend(false)
-    }, [docId])
+
+        currentUser?.map(userItem => {
+            userItem.friends.map(friend => {
+                if (friend === userInfo.uid)
+                    setIfRequestSend(true)
+            })
+        })
+    }, [docId, currentUser])
 
     const sendFriendRequestHandler = async () => {
         await addDoc(notificationsRef, {
