@@ -3,22 +3,19 @@ import { collection, query, where } from "firebase/firestore"
 import { useCollectionData } from "react-firebase-hooks/firestore"
 import { FirebaseContext } from "./FirebaseProvider"
 import { UserItem } from "./UserItem"
-import { useAuthState } from "react-firebase-hooks/auth"
 
 export const SearchUsersList = () => {
     const [searchValue, setSearchValue] = useState("kveenter@gmail.com")
-    const [userByEmail, setUserByEmail] = useState(null)
+    const [searchedUserByEmail, setSearchedUserByEmail] = useState(null)
 
-    const { auth, firestore } = useContext(FirebaseContext)
-
-    const [user] = useAuthState(auth)
+    const { firestore } = useContext(FirebaseContext)
 
     const usersRef = collection(firestore, "users")
     const userSearchRef = query(usersRef, where("email", "==", searchValue))
     const [searchedUser] = useCollectionData(userSearchRef)
 
     const searchUserByEmail = () => {
-        setUserByEmail(searchedUser)
+        setSearchedUserByEmail(searchedUser)
     }
 
     return (
@@ -29,8 +26,8 @@ export const SearchUsersList = () => {
             </div>
             <div className="search-users-list">
                 {
-                    userByEmail?.map(userByEmail => (
-                        <UserItem key={userByEmail.uid} currentUser={user} user={userByEmail} isFriend={false}/>
+                    searchedUserByEmail?.map(user => (
+                        <UserItem key={user.uid} userInfo={user} isFriend={false}/>
                     ))
                 }
             </div>

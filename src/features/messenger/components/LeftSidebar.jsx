@@ -10,18 +10,24 @@ import { UserInfoModal } from "./UserInfoModal"
 import { NotificationModal } from "./NotificationModal"
 import { NotificationIcon } from "./NotificationIcon"
 import "../../../assets/css/messenger/leftSidebar.css"
+import { collection, query, where } from "firebase/firestore"
+import { useCollectionData } from "react-firebase-hooks/firestore"
 
 export const LeftSidebar = () => {
     const [isFriendsTab, setIsFriendsTab] = useState(true)
     const [isUserInfoModalShow, setIsUserInfoModalShow] = useState(false)
     const [isNotificationModalShow, setIsNotificationModalShow] = useState(false)
 
-    const { auth } = useContext(FirebaseContext)
+    const { auth, firestore } = useContext(FirebaseContext)
     const [user] = useAuthState(auth)
+
+    const notificationsRef = collection(firestore, "notifications")
+    const getAllNotifications = user && query(notificationsRef, where("sendTo", "in", [user.uid]))
+    const [notifications] = useCollectionData(getAllNotifications)
 
     const renderModal = () => {
         if (isUserInfoModalShow) return <UserInfoModal user={user} setActive={setIsUserInfoModalShow}/>
-        if (isNotificationModalShow) return <NotificationModal user={user} setActive={setIsNotificationModalShow}/>
+        if (isNotificationModalShow) return <NotificationModal setActive={setIsNotificationModalShow}/>
     }
 
     return (
@@ -32,7 +38,7 @@ export const LeftSidebar = () => {
                     <p className="current-user-name">{ user?.displayName }</p>
                 </div>
 
-                <NotificationIcon setActive={setIsNotificationModalShow}/>
+                <NotificationIcon notifications={notifications} setActive={setIsNotificationModalShow}/>
             </div>
 
             {

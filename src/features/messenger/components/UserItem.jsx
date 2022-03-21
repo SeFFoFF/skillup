@@ -2,29 +2,31 @@ import React, { useContext, useEffect, useState } from "react"
 import { addDoc, collection, query, serverTimestamp, where } from "firebase/firestore"
 import { FirebaseContext } from "./FirebaseProvider"
 import { useCollectionData } from "react-firebase-hooks/firestore"
+import { useAuthState } from "react-firebase-hooks/auth"
 import "../../../assets/css/messenger/userItem.css"
 
-export const UserItem = ({ currentUser, user, isFriend = true }) => {
+export const UserItem = ({ userInfo, isFriend = true }) => {
     const [isRequestSend, setIfRequestSend] = useState(false)
 
-    const { firestore } = useContext(FirebaseContext)
+    const { auth, firestore } = useContext(FirebaseContext)
+    const [user] = useAuthState(auth)
 
     const notificationsRef = collection(firestore, "notifications")
-    const sendToUserRef = query(notificationsRef, where("sendTo", "==", user.uid))
-    const [sendToUser] = useCollectionData(sendToUserRef)
+
+    const docIdRef = user && userInfo && query(notificationsRef, where("id", "==", user.uid + userInfo.uid))
+    const [docId] = useCollectionData(docIdRef)
 
     useEffect(() => {
-        if (sendToUser && sendToUser.length) setIfRequestSend(true)
+        if (docId && docId.length) setIfRequestSend(true)
         else setIfRequestSend(false)
-    }, [sendToUser])
+    }, [docId])
 
     const sendFriendRequestHandler = async () => {
         await addDoc(notificationsRef, {
-            name: currentUser.displayName,
-            photoURL: currentUser.photoURL,
-            sendFrom: currentUser.uid,
-            sendTo: user.uid,
-            state: "sent",
+            displayName: user.displayName,
+            photoURL: user.photoURL,
+            sendFrom: user.uid,
+            sendTo: userInfo.uid,
             dateTime: serverTimestamp(),
         })
         setIfRequestSend(true)
@@ -32,9 +34,9 @@ export const UserItem = ({ currentUser, user, isFriend = true }) => {
 
     return (
         <div className="user-item">
-            <img className="user-image" src={user?.photoURL} alt=""/>
+            <img className="user-image" src={userInfo?.photoURL} alt=""/>
             <div className="user-info">
-                <p className="user-info__name">{ user?.displayName }</p>
+                <p className="user-info__name">{ userInfo?.displayName }</p>
                 {
                     isFriend && <p className="user-info__last-message">Lorem ipsum dolor. Lorem ipsum dolor. Lorem ipsum dolor.</p>
                 }

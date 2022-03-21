@@ -24,7 +24,7 @@ export const FriendsList = ({ user }) => {
 
     const renderFriends = () => {
         return friends && friends.map(friend => {
-            return <UserItem key={friend.uid} user={friend} isFriend={true}/>
+            return <UserItem key={friend.uid} userInfo={friend} isFriend={true}/>
         })
     }
 
