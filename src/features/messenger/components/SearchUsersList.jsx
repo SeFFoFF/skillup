@@ -3,6 +3,7 @@ import { collection, query, where } from "firebase/firestore"
 import { useCollectionData } from "react-firebase-hooks/firestore"
 import { FirebaseContext } from "./FirebaseProvider"
 import { UserItem } from "./UserItem"
+import "../../../assets/css/messenger/searchUsersList.css"
 
 export const SearchUsersList = ({ user }) => {
     const [isSameUser, setIsSameUser] = useState(false)
@@ -17,22 +18,17 @@ export const SearchUsersList = ({ user }) => {
 
     useEffect(() => {
         searchedUser?.map(userItem => {
-            if (userItem.uid === user.uid)
-                setIsSameUser(true)
+            if (userItem.uid === user.uid) setIsSameUser(true)
+            else setIsSameUser(false)
         })
-    }, [searchedUser])
 
-    const searchUserByEmail = () => {
         setSearchedUserByEmail(searchedUser)
-    }
-
-    // TODO Oops placeholder and styles for search input
+    }, [searchedUser])
 
     return (
         <div className="search-users">
-            <div className="">
-                <input type="text" value={searchValue} onChange={e => setSearchValue(e.target.value)} placeholder="Search by email"/>
-                <button onClick={searchUserByEmail}>Search</button>
+            <div className="search-users__input-wrapper">
+                <input type="text" value={searchValue} onChange={e => setSearchValue(e.target.value)} placeholder="Enter user email"/>
             </div>
             <div className="search-users-list">
                 {
@@ -40,7 +36,7 @@ export const SearchUsersList = ({ user }) => {
                         searchedUserByEmail?.map(user => (
                             <UserItem key={user.uid} userInfo={user} isFriend={false}/>
                         ))
-                        : <p>Oops</p>
+                        : null
                 }
             </div>
         </div>

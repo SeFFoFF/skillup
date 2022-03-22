@@ -1,0 +1,29 @@
+.search-users {
+    margin: 5px 0 0 0;
+}
+
+.search-users__input-wrapper {
+    display: flex;
+    flex-direction: column;
+    row-gap: 5px;
+}
+
+.search-users__input-wrapper input {
+    background: #fff;
+    color: black;
+    font: inherit;
+    border-top: 1px solid #f1f1f1;
+    border-left: 0;
+    border-right: 0;
+    border-bottom: 1px solid #f1f1f1;
+    outline: 0;
+    padding: 15px 10px;
+}
+
+.search-users__input-wrapper input:focus {
+    border: 1px solid #b1dbe8;
+}
+
+.search-users__input-wrapper input::placeholder {
+    color: #949494;
+}

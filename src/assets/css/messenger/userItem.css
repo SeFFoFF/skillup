@@ -4,7 +4,6 @@
     column-gap: 10px;
     padding: 5px 10px;
     border-top: 1px solid #f1f1f1;
-    cursor: pointer;
 }
 
 .user-item:hover {
@@ -16,8 +15,15 @@
     border-radius: 50%;
 }
 
-.user-info {
-    /*display: flex;*/
+.user-info--searched {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+}
+
+.user-info--searched svg:hover {
+    cursor: pointer;
+    color: #19a2c1;
 }
 
 .user-info__name {

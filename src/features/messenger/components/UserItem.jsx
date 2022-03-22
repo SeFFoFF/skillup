@@ -3,6 +3,7 @@ import { addDoc, collection, query, serverTimestamp, where } from "firebase/fire
 import { FirebaseContext } from "./FirebaseProvider"
 import { useCollectionData } from "react-firebase-hooks/firestore"
 import { useAuthState } from "react-firebase-hooks/auth"
+import { IoPersonAddSharp } from "react-icons/io5"
 import "../../../assets/css/messenger/userItem.css"
 
 export const UserItem = ({ userInfo, isFriend = true }) => {
@@ -34,6 +35,7 @@ export const UserItem = ({ userInfo, isFriend = true }) => {
 
     const sendFriendRequestHandler = async () => {
         await addDoc(notificationsRef, {
+            id: user.uid + userInfo.uid,
             displayName: user.displayName,
             photoURL: user.photoURL,
             sendFrom: user.uid,
@@ -43,16 +45,18 @@ export const UserItem = ({ userInfo, isFriend = true }) => {
         setIfRequestSend(true)
     }
 
+    // TODO open chat with friend
+
     return (
         <div className="user-item">
             <img className="user-image" src={userInfo?.photoURL} alt=""/>
-            <div className="user-info">
+            <div className={isFriend ? "user-info" : "user-info--searched"}>
                 <p className="user-info__name">{ userInfo?.displayName }</p>
                 {
                     isFriend && <p className="user-info__last-message">Lorem ipsum dolor. Lorem ipsum dolor. Lorem ipsum dolor.</p>
                 }
                 {
-                    !isFriend && !isRequestSend && <button onClick={sendFriendRequestHandler}>Send</button>
+                    !isFriend && !isRequestSend && <IoPersonAddSharp size="20px" onClick={sendFriendRequestHandler}/>
                 }
             </div>
         </div>
