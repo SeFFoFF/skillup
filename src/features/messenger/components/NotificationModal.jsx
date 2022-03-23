@@ -42,7 +42,7 @@ export const NotificationModal = ({ setActive }) => {
                 key={notification.id}
                 notification={notification}
                 currentUser={currentUser}
-                setCurrentUser={setCurrentUser}
+                users={users}
             />
         )
     }

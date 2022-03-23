@@ -1,4 +1,4 @@
-import React, { useContext } from "react"
+import React, { useContext, useEffect, useState } from "react"
 import dayjs from "dayjs"
 import { AiOutlineCheck } from "react-icons/ai"
 import { VscClose } from "react-icons/vsc"
@@ -6,27 +6,48 @@ import { deleteDoc, doc, updateDoc } from "firebase/firestore"
 import { FirebaseContext } from "./FirebaseProvider"
 import "../../../assets/css/messenger/notificationUserCard.css"
 
-export const NotificationUserCard = ({ notification, currentUser }) => {
+export const NotificationUserCard = ({ notification, currentUser, users }) => {
+    const [sendFromUser, setSetFromUser] = useState(null)
+
     const { firestore } = useContext(FirebaseContext)
 
-    // TODO two way accept
+    useEffect(() => {
+        users?.map(userItem => {
+            if (userItem.uid === notification.sendFrom)
+                setSetFromUser(userItem)
+        })
+    }, [users])
+
     const acceptRequestHandler = async (userId, docId) => {
         try {
-            let payload
+            let payloadForCurrentUser
+            let payLoadForSendFromUser
 
-            const usersDocRef = doc(firestore, "users", userId)
+            const currentUserDocRef = doc(firestore, "users", userId)
+            const sendFromUserDocRef = doc(firestore, "users", sendFromUser.docId)
 
             if (currentUser && currentUser.friends[0] === "placeholder") {
-                payload = {
+                payloadForCurrentUser = {
                     friends: [`${notification.sendFrom}`]
                 }
             } else {
-                payload = {
+                payloadForCurrentUser = {
                     friends: [...currentUser.friends, `${notification.sendFrom}`]
                 }
             }
 
-            await updateDoc(usersDocRef, payload)
+            if (sendFromUser && sendFromUser.friends[0] === "placeholder") {
+                payLoadForSendFromUser = {
+                    friends: [`${notification.sendTo}`]
+                }
+            } else {
+                payLoadForSendFromUser = {
+                    friends: [...sendFromUser.friends, `${notification.sendTo}`]
+                }
+            }
+
+            await updateDoc(currentUserDocRef, payloadForCurrentUser)
+            await updateDoc(sendFromUserDocRef, payLoadForSendFromUser)
 
             const notificationsDocRef = doc(firestore, "notifications", docId)
             await deleteDoc(notificationsDocRef)
