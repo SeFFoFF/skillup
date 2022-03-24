@@ -2,32 +2,19 @@ import React, { useContext, useEffect, useRef } from "react"
 import { Loader } from "../../../shared"
 import { FirebaseContext } from "./FirebaseProvider"
 import { useAuthState } from "react-firebase-hooks/auth"
-import { addDoc, collection, orderBy, query } from "firebase/firestore"
+import { addDoc, collection } from "firebase/firestore"
 import { useCollectionData } from "react-firebase-hooks/firestore"
 import { Message } from "./Message"
 import "../../../assets/css/messenger/chatBlock.css"
 
-export const ChatBlock = () => {
+export const ChatBlock = ({ messagesAndLoading }) => {
     const scrollBlock = useRef(null)
 
-    const { auth, firestore } = useContext(FirebaseContext)
+    const { auth, firestore, chat } = useContext(FirebaseContext)
     const [user] = useAuthState(auth)
 
     const usersRef = collection(firestore, "users")
     const [usersCollection] = useCollectionData(usersRef)
-
-    const messagesRef = collection(firestore, "messages")
-    const messagesRefByCreatedAt = query(messagesRef, orderBy("createdAt"))
-    const [messages, loading] = useCollectionData(messagesRefByCreatedAt)
-
-    useEffect(() => {
-        if (scrollBlock) {
-            scrollBlock.current.addEventListener("DOMNodeInserted", event => {
-                const { currentTarget: target } = event
-                target.scroll({ top: target.scrollHeight, behavior: "smooth" })
-            })
-        }
-    }, [])
 
     useEffect(async () => {
         if (usersCollection) {
@@ -53,18 +40,41 @@ export const ChatBlock = () => {
         }
     }, [usersCollection])
 
-    const renderMessages = () => {
-        return messages?.map((message, index) => {
-            const isUserSender = user?.uid === message?.uid
+    useEffect(() => {
+        if (scrollBlock) {
+            scrollBlock.current.addEventListener("DOMNodeInserted", event => {
+                const { currentTarget: target } = event
+                target.scroll({ top: target.scrollHeight, behavior: "smooth" })
+            })
+        }
+    }, [])
 
-            return <Message key={index} message={message} isUserSender={isUserSender}/>
-        })
+    const renderMessages = () => {
+        if (messagesAndLoading.messages1?.length) {
+            return messagesAndLoading.loading1 ?
+                <Loader/> 
+                :
+                messagesAndLoading.messages1?.map((message, index) => {
+                    const isUserSender = user?.uid === message?.sendFrom
+
+                    return <Message key={index} message={message} isUserSender={isUserSender}/>
+                })
+        } else {
+            return messagesAndLoading.loading2 ?
+                <Loader/>
+                :
+                messagesAndLoading.messages2?.map((message, index) => {
+                    const isUserSender = user?.uid === message?.sendFrom
+
+                    return <Message key={index} message={message} isUserSender={isUserSender}/>
+                })
+        }
     }
 
     return (
         <div className="chat-block" ref={scrollBlock}>
             {
-                loading ? <Loader/> : renderMessages()
+                chat ? renderMessages() : <p>Select a friend to chat with him</p>
             }
         </div>
     )

@@ -9,7 +9,7 @@ import "../../../assets/css/messenger/userItem.css"
 export const UserItem = ({ userInfo, isFriend = true }) => {
     const [isRequestSend, setIfRequestSend] = useState(false)
 
-    const { auth, firestore } = useContext(FirebaseContext)
+    const { auth, firestore, setChat } = useContext(FirebaseContext)
     const [user] = useAuthState(auth)
 
     const notificationsRef = collection(firestore, "notifications")
@@ -45,10 +45,8 @@ export const UserItem = ({ userInfo, isFriend = true }) => {
         setIfRequestSend(true)
     }
 
-    // TODO open chat with friend
-
     return (
-        <div className="user-item">
+        <div className={isFriend ? "user-item user-item--friend" : "user-item"} onClick={() => setChat(userInfo)}>
             <img className="user-image" src={userInfo?.photoURL} alt=""/>
             <div className={isFriend ? "user-info" : "user-info--searched"}>
                 <p className="user-info__name">{ userInfo?.displayName }</p>

@@ -6,6 +6,10 @@
     border-top: 1px solid #f1f1f1;
 }
 
+.user-item--friend {
+    cursor: pointer;
+}
+
 .user-item:hover {
     background-color: #f8f8f8;
 }
