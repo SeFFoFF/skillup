@@ -1,13 +1,13 @@
 {
   "files": {
-    "main.css": "/skillup/static/css/main.0f8fcb7e.css",
-    "main.js": "/skillup/static/js/main.1ecd6f1e.js",
+    "main.css": "/skillup/static/css/main.9bf39f9a.css",
+    "main.js": "/skillup/static/js/main.79940fdf.js",
     "index.html": "/skillup/index.html",
-    "main.0f8fcb7e.css.map": "/skillup/static/css/main.0f8fcb7e.css.map",
-    "main.1ecd6f1e.js.map": "/skillup/static/js/main.1ecd6f1e.js.map"
+    "main.9bf39f9a.css.map": "/skillup/static/css/main.9bf39f9a.css.map",
+    "main.79940fdf.js.map": "/skillup/static/js/main.79940fdf.js.map"
   },
   "entrypoints": [
-    "static/css/main.0f8fcb7e.css",
-    "static/js/main.1ecd6f1e.js"
+    "static/css/main.9bf39f9a.css",
+    "static/js/main.79940fdf.js"
   ]
 }
