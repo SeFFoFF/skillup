@@ -5,8 +5,9 @@ import { useAuthState } from "react-firebase-hooks/auth"
 import { addDoc, collection } from "firebase/firestore"
 import { useCollectionData } from "react-firebase-hooks/firestore"
 import { Message } from "./Message"
-import "../../../assets/css/messenger/chatBlock.css"
 import { Placeholder } from "./Placeholder"
+import dayjs from "dayjs"
+import "../../../assets/css/messenger/chatBlock.css"
 
 export const ChatBlock = ({ messagesAndLoading }) => {
     const scrollBlock = useRef(null)
@@ -72,11 +73,25 @@ export const ChatBlock = ({ messagesAndLoading }) => {
         }
     }
 
+    // TODO Last seen, open friend modal, delete friend
+
     return (
-        <div className="chat-block" ref={scrollBlock}>
+        <div className="chat-block">
             {
-                chat ? renderMessages() : <Placeholder text="Select a friend to chat with him"/>
+                chat &&
+                <div className="chat-block__header">
+                    <img className="friend-image" src={chat?.photoURL} alt="icon"/>
+                    <div className="friend-info">
+                        <p className="friend-name">{ chat?.displayName }</p>
+                        <p>{ `Last seen at ${dayjs(chat?.lastSignInTime).format("DD.MM.YYYY hh:mm")} (test)`  }</p>
+                    </div>
+                </div>
             }
+            <div className="chat-block__wrapper" ref={scrollBlock}>
+                {
+                    chat ? renderMessages() : <Placeholder text="Select a friend to chat with him"/>
+                }
+            </div>
         </div>
     )
 }
