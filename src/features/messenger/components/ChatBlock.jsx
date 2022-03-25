@@ -6,6 +6,7 @@ import { addDoc, collection } from "firebase/firestore"
 import { useCollectionData } from "react-firebase-hooks/firestore"
 import { Message } from "./Message"
 import "../../../assets/css/messenger/chatBlock.css"
+import { Placeholder } from "./Placeholder"
 
 export const ChatBlock = ({ messagesAndLoading }) => {
     const scrollBlock = useRef(null)
@@ -74,7 +75,7 @@ export const ChatBlock = ({ messagesAndLoading }) => {
     return (
         <div className="chat-block" ref={scrollBlock}>
             {
-                chat ? renderMessages() : <p>Select a friend to chat with him</p>
+                chat ? renderMessages() : <Placeholder text="Select a friend to chat with him"/>
             }
         </div>
     )

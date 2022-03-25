@@ -4,6 +4,7 @@ import { collection, onSnapshot } from "firebase/firestore"
 import { FirebaseContext } from "./FirebaseProvider"
 import { useAuthState } from "react-firebase-hooks/auth"
 import "../../../assets/css/messenger/notificationModal.css"
+import { Placeholder } from "./Placeholder"
 
 export const NotificationModal = ({ setActive }) => {
     const [notifications, setNotifications] = useState([])
@@ -50,7 +51,7 @@ export const NotificationModal = ({ setActive }) => {
     return (
         <div className="notification-modal" onClick={() => setActive(false)}>
             <div className="notification-modal__content" onClick={e => e.stopPropagation()}>
-                <p>Friend requests</p>
+                {notifications?.length ? <p>Friend requests</p> : <Placeholder text="No recent notifications"/>}
                 {
                     renderNotifications()
                 }

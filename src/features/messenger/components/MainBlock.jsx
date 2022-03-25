@@ -63,7 +63,9 @@ export const MainBlock = () => {
     return (
         <div className="main-block">
             <ChatBlock messagesAndLoading={messagesAndLoadingProps}/>
-            <MessageInput messageValue={messageValue} setMessageValue={setMessageValue} sendMessage={sendMessage}/>
+            {
+                chat && <MessageInput messageValue={messageValue} setMessageValue={setMessageValue} sendMessage={sendMessage}/>
+            }
         </div>
     )
 }
