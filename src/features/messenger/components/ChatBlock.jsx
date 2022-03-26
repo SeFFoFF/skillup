@@ -9,10 +9,10 @@ import { Placeholder } from "./Placeholder"
 import dayjs from "dayjs"
 import "../../../assets/css/messenger/chatBlock.css"
 
-export const ChatBlock = ({ messagesAndLoading }) => {
+export const ChatBlock = () => {
     const scrollBlock = useRef(null)
 
-    const { auth, firestore, chat } = useContext(FirebaseContext)
+    const { auth, firestore, chat, chatInfo } = useContext(FirebaseContext)
     const [user] = useAuthState(auth)
 
     const usersRef = collection(firestore, "users")
@@ -52,25 +52,14 @@ export const ChatBlock = ({ messagesAndLoading }) => {
     }, [])
 
     const renderMessages = () => {
-        if (messagesAndLoading.messages1?.length) {
-            return messagesAndLoading.loading1 ?
-                <Loader/> 
-                :
-                messagesAndLoading.messages1?.map((message, index) => {
-                    const isUserSender = user?.uid === message?.sendFrom
+        return chatInfo?.loading ?
+            <Loader/> 
+            :
+            chatInfo?.messages?.map((message, index) => {
+                const isUserSender = user?.uid === message?.sendFrom
 
-                    return <Message key={index} message={message} isUserSender={isUserSender}/>
-                })
-        } else {
-            return messagesAndLoading.loading2 ?
-                <Loader/>
-                :
-                messagesAndLoading.messages2?.map((message, index) => {
-                    const isUserSender = user?.uid === message?.sendFrom
-
-                    return <Message key={index} message={message} isUserSender={isUserSender}/>
-                })
-        }
+                return <Message key={index} message={message} isUserSender={isUserSender}/>
+            })
     }
 
     // TODO Last seen, open friend modal, delete friend

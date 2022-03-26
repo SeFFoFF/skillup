@@ -3,8 +3,8 @@ import { NotificationUserCard } from "./NotificationUserCard"
 import { collection, onSnapshot } from "firebase/firestore"
 import { FirebaseContext } from "./FirebaseProvider"
 import { useAuthState } from "react-firebase-hooks/auth"
-import "../../../assets/css/messenger/notificationModal.css"
 import { Placeholder } from "./Placeholder"
+import "../../../assets/css/messenger/notificationModal.css"
 
 export const NotificationModal = ({ setActive }) => {
     const [notifications, setNotifications] = useState([])

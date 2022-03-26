@@ -35,8 +35,16 @@
 }
 
 .user-info__last-message {
-    width: 180px;
+    max-width: 180px;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
+}
+
+.user-info__new-message {
+    min-width: 7px;
+    min-height: 7px;
+    border-radius: 50%;
+    background-color: blue;
+    margin-left: auto;
 }

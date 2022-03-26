@@ -52,6 +52,7 @@ export const NotificationUserCard = ({ notification, currentUser, users }) => {
             const notificationsDocRef = doc(firestore, "notifications", docId)
             await deleteDoc(notificationsDocRef)
 
+            // TODO create notifications
             alert("Request has been accepted")
         } catch (error) {
             alert(error)
