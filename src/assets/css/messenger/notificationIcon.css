@@ -1,0 +1,28 @@
+.notification-icon-wrapper {
+    position: relative;
+    cursor: pointer;
+}
+
+.notifications {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    position: absolute;
+    top: -5px;
+    left: 10px;
+    z-index: 2;
+
+    width: 15px;
+    height: 15px;
+
+    font-size: 10px;
+
+    background-color: crimson;
+    color: white;
+    border-radius: 50%;
+}
+
+.notification-icon-wrapper:hover svg {
+    color: #b1dbe8;
+}

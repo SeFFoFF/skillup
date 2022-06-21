@@ -7,7 +7,7 @@ export const ProjectCardsList = ({ projects }) => {
 
     const renderProjectCards = () => {
         return projects.map(card => (
-            <Link key={card.id} to={`/${card.name}`}>
+            <Link key={card.id} to={`/${card.name.toLowerCase()}`}>
                 <ProjectCard text={card.name}/>
             </Link>
         ))

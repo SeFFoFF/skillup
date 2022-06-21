@@ -1,0 +1,50 @@
+.user-item {
+    display: flex;
+    align-items: center;
+    column-gap: 10px;
+    padding: 5px 10px;
+    border-top: 1px solid #f1f1f1;
+}
+
+.user-item--friend {
+    cursor: pointer;
+}
+
+.user-item:hover {
+    background-color: #f8f8f8;
+}
+
+.user-image {
+    width: 35px;
+    border-radius: 50%;
+}
+
+.user-info--searched {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+}
+
+.user-info--searched svg:hover {
+    cursor: pointer;
+    color: #19a2c1;
+}
+
+.user-info__name {
+    font-weight: 500;
+}
+
+.user-info__last-message {
+    max-width: 180px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.user-info__new-message {
+    min-width: 7px;
+    min-height: 7px;
+    border-radius: 50%;
+    background-color: blue;
+    margin-left: auto;
+}

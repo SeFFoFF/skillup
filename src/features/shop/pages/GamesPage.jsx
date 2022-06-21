@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react"
 import { getUniqueTags, getFilteredGamesByTags, getAllGames } from "../../../utils"
-import { GameCardsList, GamesFilter, Loader } from "../components"
+import { GameCardsList, GamesFilter } from "../components"
+import { Loader } from "../../../shared"
 
 export const GamesPage = () => {
     const [games, setGames] = useState([])

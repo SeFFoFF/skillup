@@ -1,0 +1,34 @@
+.left-sidebar {
+    position: relative;
+    width: 20%;
+    height: 85vh;
+}
+
+.left-sidebar .tabs {
+    display: flex;
+    align-items: center;
+    box-shadow: rgba(0, 0, 0, 0.15) 0.1px 1.95px 2.6px;
+}
+
+.left-sidebar .current-user-info__wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 15px 25px;
+}
+
+.left-sidebar .current-user-info {
+    display: flex;
+    align-items: center;
+    column-gap: 10px;
+    cursor: pointer;
+}
+
+.left-sidebar .current-user-info:hover {
+    color: #b1dbe8;
+}
+
+.left-sidebar .current-user-info .current-user-image {
+    width: 35px;
+    border-radius: 50%;
+}

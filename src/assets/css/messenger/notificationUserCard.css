@@ -1,0 +1,43 @@
+.notification-user-card {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    column-gap: 10px;
+    width: 350px;
+}
+
+.notification-user-card .user-info {
+    display: flex;
+    align-items: center;
+    column-gap: 10px;
+}
+
+.notification-user-card .user-info .user-image {
+    width: 35px;
+    border-radius: 50%;
+}
+
+.notification-user-card .user-info__wrapper .user-info__name {
+    font-weight: 500;
+}
+
+.notification-user-card .user-info__wrapper .user-info__request-time {
+
+}
+
+.notification-user-card .buttons-wrapper {
+    display: flex;
+    column-gap: 10px;
+}
+
+.notification-user-card .buttons-wrapper svg {
+    cursor: pointer;
+}
+
+.notification-user-card .buttons-wrapper svg:first-child:hover {
+    color: lawngreen;
+}
+
+.notification-user-card .buttons-wrapper svg:last-child:hover {
+    color: crimson;
+}
